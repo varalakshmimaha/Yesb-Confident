@@ -118,6 +118,28 @@
     .alert{padding:12px 18px;border-radius:10px;margin-bottom:18px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
     .alert-success{background:#dcf5e7;color:#1a8a4a}
 
+    /* Tab panes */
+    .tab-pane{display:none}
+    .tab-pane.show{display:block}
+    .tab-pane.stats-grid.show{display:grid}
+
+    /* Settings */
+    .settings-form{padding:28px 24px}
+    .settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+    .s-section-title{font-size:14px;font-weight:700;color:var(--primary);margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+    .s-section-title i{color:var(--accent)}
+    .s-label{display:block;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin:14px 0 6px;display:flex;align-items:center;gap:8px}
+    .s-input{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;outline:none;background:var(--light);transition:var(--transition)}
+    .s-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(232,160,32,.1);background:var(--white)}
+    .s-hint{font-size:11px;color:var(--muted);margin-top:6px}
+    .logo-preview-box{width:100%;height:140px;border:2px dashed var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:8px;background:var(--light);overflow:hidden}
+    .logo-preview-box img{max-width:100%;max-height:100%;object-fit:contain}
+    .logo-placeholder{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-size:12px}
+    .logo-placeholder i{font-size:32px;opacity:.4}
+    .settings-foot{padding:20px 0 0;border-top:1px solid var(--border);margin-top:28px;display:flex;justify-content:flex-end}
+    .settings-foot .btn-search{padding:11px 26px;font-size:13px;display:flex;align-items:center;gap:8px}
+    @media(max-width:900px){.settings-grid{grid-template-columns:1fr}}
+
     @media(max-width:900px){
       .sidebar{width:60px;padding:16px 0}
       .sb-logo-text,.sb-logo-sub,.sb-link span,.sb-user-info,.sb-user-role,.btn-logout span{display:none}
@@ -149,8 +171,9 @@
     </div>
   </div>
   <div class="sb-nav">
-    <a href="{{ route('admin.dashboard') }}" class="sb-link active"><i class="fas fa-chart-pie"></i><span>Dashboard</span></a>
-    <a href="#tableCard" class="sb-link"><i class="fas fa-envelope-open-text"></i><span>Enquiries</span></a>
+    <a href="#dashboard" class="sb-link" data-tab="dashboard"><i class="fas fa-chart-pie"></i><span>Dashboard</span></a>
+    <a href="#enquiries" class="sb-link" data-tab="enquiries"><i class="fas fa-envelope-open-text"></i><span>Enquiries</span></a>
+    <a href="#settings" class="sb-link" data-tab="settings"><i class="fas fa-cog"></i><span>Settings</span></a>
     <a href="{{ route('home') }}" target="_blank" class="sb-link"><i class="fas fa-globe"></i><span>View Website</span></a>
   </div>
   <div class="sb-footer">
@@ -171,7 +194,7 @@
 <!-- Main Content -->
 <div class="main">
   <div class="top-bar">
-    <h2>Dashboard</h2>
+    <h2 id="pageTitle">Dashboard</h2>
     <div class="top-date">{{ now()->format('l, F j, Y') }}</div>
   </div>
 
@@ -179,8 +202,15 @@
     <div class="alert alert-success"><i class="fas fa-check-circle"></i> {{ session('success') }}</div>
   @endif
 
-  <!-- Stats -->
-  <div class="stats-grid">
+  @if($errors->any())
+    <div class="alert" style="background:#fde8e8;color:#b02a2a">
+      <i class="fas fa-exclamation-circle"></i>
+      <div>@foreach($errors->all() as $err)<div>{{ $err }}</div>@endforeach</div>
+    </div>
+  @endif
+
+  <!-- Stats (Dashboard tab only) -->
+  <div class="stats-grid tab-pane" data-pane="dashboard">
     <div class="stat-card">
       <div class="stat-icon blue"><i class="fas fa-envelope"></i></div>
       <div class="stat-info"><div class="stat-num">{{ $stats['total'] }}</div><div class="stat-label">Total Enquiries</div></div>
@@ -199,8 +229,8 @@
     </div>
   </div>
 
-  <!-- Enquiries Table -->
-  <div class="table-card" id="tableCard">
+  <!-- Enquiries Table (Dashboard + Enquiries tabs) -->
+  <div class="table-card tab-pane" id="tableCard" data-pane="dashboard enquiries">
     <div class="table-header">
       <h3><i class="fas fa-inbox" style="color:var(--accent);margin-right:8px"></i>All Enquiries</h3>
       <div class="table-actions">
@@ -263,6 +293,53 @@
         </tbody>
       </table>
     @endif
+  </div>
+
+  <!-- Settings Pane -->
+  <div class="table-card tab-pane" data-pane="settings">
+    <div class="table-header">
+      <h3><i class="fas fa-cog" style="color:var(--accent);margin-right:8px"></i>Website Settings</h3>
+    </div>
+    <form action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data" class="settings-form">
+      @csrf
+      <div class="settings-grid">
+        <div class="s-section">
+          <h4 class="s-section-title"><i class="fas fa-image"></i> Site Logo</h4>
+          <div class="logo-preview-box">
+            @if($settings['logo_path'])
+              <img src="{{ asset('storage/' . $settings['logo_path']) }}" alt="Current logo" id="logoPreview">
+            @else
+              <div class="logo-placeholder" id="logoPreview"><i class="fas fa-image"></i><span>No logo uploaded</span></div>
+            @endif
+          </div>
+          <label class="s-label">Upload New Logo</label>
+          <input type="file" name="logo" accept="image/*" class="s-input" onchange="previewLogo(event)">
+          <div class="s-hint">JPG, PNG, SVG, or WEBP. Max 2MB. Recommended: 200×60px.</div>
+        </div>
+
+        <div class="s-section">
+          <h4 class="s-section-title"><i class="fas fa-share-nodes"></i> Social Media Links</h4>
+
+          <label class="s-label"><i class="fab fa-facebook-f" style="color:#1877F2"></i> Facebook URL</label>
+          <input type="url" name="facebook_url" value="{{ old('facebook_url', $settings['facebook_url']) }}" placeholder="https://facebook.com/yourpage" class="s-input">
+
+          <label class="s-label"><i class="fab fa-instagram" style="color:#E4405F"></i> Instagram URL</label>
+          <input type="url" name="instagram_url" value="{{ old('instagram_url', $settings['instagram_url']) }}" placeholder="https://instagram.com/yourhandle" class="s-input">
+
+          <label class="s-label"><i class="fab fa-youtube" style="color:#FF0000"></i> YouTube URL</label>
+          <input type="url" name="youtube_url" value="{{ old('youtube_url', $settings['youtube_url']) }}" placeholder="https://youtube.com/@yourchannel" class="s-input">
+
+          <label class="s-label"><i class="fab fa-twitter" style="color:#1DA1F2"></i> Twitter / X URL</label>
+          <input type="url" name="twitter_url" value="{{ old('twitter_url', $settings['twitter_url']) }}" placeholder="https://twitter.com/yourhandle" class="s-input">
+
+          <label class="s-label"><i class="fab fa-whatsapp" style="color:#25D366"></i> WhatsApp (number or wa.me link)</label>
+          <input type="text" name="whatsapp_url" value="{{ old('whatsapp_url', $settings['whatsapp_url']) }}" placeholder="918884110767 or https://wa.me/918884110767" class="s-input">
+        </div>
+      </div>
+      <div class="settings-foot">
+        <button type="submit" class="btn-search"><i class="fas fa-save"></i> Save Settings</button>
+      </div>
+    </form>
   </div>
 </div>
 
@@ -335,6 +412,46 @@
 
   function closeModal() {
     document.getElementById('viewModal').classList.remove('show');
+  }
+
+  // ===== TAB SWITCHING =====
+  const tabTitles = { dashboard: 'Dashboard', enquiries: 'Enquiries', settings: 'Settings' };
+
+  function showTab(name) {
+    if (!tabTitles[name]) name = 'dashboard';
+    document.querySelectorAll('.tab-pane').forEach(p => {
+      const panes = (p.dataset.pane || '').split(' ');
+      p.classList.toggle('show', panes.includes(name));
+    });
+    document.querySelectorAll('.sb-link[data-tab]').forEach(a => {
+      a.classList.toggle('active', a.dataset.tab === name);
+    });
+    document.getElementById('pageTitle').textContent = tabTitles[name];
+    if (location.hash !== '#' + name) history.replaceState(null, '', '#' + name);
+  }
+
+  document.querySelectorAll('.sb-link[data-tab]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      showTab(link.dataset.tab);
+    });
+  });
+
+  // Initial tab: URL hash > query param > default
+  const urlParams = new URLSearchParams(location.search);
+  const initialTab = (location.hash || '').replace('#', '') || urlParams.get('tab') || 'dashboard';
+  showTab(initialTab);
+
+  // ===== LOGO PREVIEW =====
+  function previewLogo(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const box = document.querySelector('.logo-preview-box');
+      box.innerHTML = '<img src="' + ev.target.result + '" alt="Preview">';
+    };
+    reader.readAsDataURL(file);
   }
 </script>
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Enquiry;
+use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -66,7 +68,16 @@ class AdminController extends Controller
             'closed' => Enquiry::where('status', 'closed')->count(),
         ];
 
-        return view('admin.dashboard', compact('enquiries', 'stats'));
+        $settings = [
+            'logo_path' => Setting::get('logo_path'),
+            'facebook_url' => Setting::get('facebook_url'),
+            'instagram_url' => Setting::get('instagram_url'),
+            'youtube_url' => Setting::get('youtube_url'),
+            'twitter_url' => Setting::get('twitter_url'),
+            'whatsapp_url' => Setting::get('whatsapp_url'),
+        ];
+
+        return view('admin.dashboard', compact('enquiries', 'stats', 'settings'));
     }
 
     public function updateStatus(Request $request, Enquiry $enquiry)
@@ -104,6 +115,37 @@ class AdminController extends Controller
         Enquiry::truncate();
 
         return back()->with('success', 'All enquiries cleared!');
+    }
+
+    public function updateSettings(Request $request)
+    {
+        if (!session('admin_logged_in')) {
+            return redirect()->route('admin.login');
+        }
+
+        $request->validate([
+            'logo' => 'nullable|image|mimes:jpg,jpeg,png,svg,webp|max:2048',
+            'facebook_url' => 'nullable|url|max:255',
+            'instagram_url' => 'nullable|url|max:255',
+            'youtube_url' => 'nullable|url|max:255',
+            'twitter_url' => 'nullable|url|max:255',
+            'whatsapp_url' => 'nullable|string|max:255',
+        ]);
+
+        if ($request->hasFile('logo')) {
+            $old = Setting::get('logo_path');
+            if ($old && Storage::disk('public')->exists($old)) {
+                Storage::disk('public')->delete($old);
+            }
+            $path = $request->file('logo')->store('logos', 'public');
+            Setting::set('logo_path', $path);
+        }
+
+        foreach (['facebook_url', 'instagram_url', 'youtube_url', 'twitter_url', 'whatsapp_url'] as $key) {
+            Setting::set($key, $request->input($key));
+        }
+
+        return redirect()->route('admin.dashboard', ['tab' => 'settings'])->with('success', 'Settings updated successfully!');
     }
 
     public function exportCsv()

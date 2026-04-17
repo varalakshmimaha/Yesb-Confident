@@ -393,12 +393,16 @@
 <nav class="navbar" id="navbar">
   <div class="logo">
     <div class="logo-mark">
-      <svg viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="46" height="46" rx="12" fill="#0A2342"/>
-        <path d="M8 33 L16 13 L23 28 L30 13 L38 33" stroke="#E8A020" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <circle cx="23" cy="12" r="3" fill="#E8A020"/>
-        <path d="M13 36 L33 36" stroke="#E8A020" stroke-width="2" stroke-linecap="round" opacity=".5"/>
-      </svg>
+      @if(!empty($settings['logo_path']))
+        <img src="{{ asset('storage/' . $settings['logo_path']) }}" alt="Logo" style="width:100%;height:100%;object-fit:contain;background:#0A2342;padding:4px">
+      @else
+        <svg viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="46" height="46" rx="12" fill="#0A2342"/>
+          <path d="M8 33 L16 13 L23 28 L30 13 L38 33" stroke="#E8A020" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="23" cy="12" r="3" fill="#E8A020"/>
+          <path d="M13 36 L33 36" stroke="#E8A020" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+        </svg>
+      @endif
     </div>
     <div>
       <div class="logo-text">Yesb <em>Confident</em></div>
@@ -840,11 +844,14 @@
       <div class="foot-logo">Yesb Confident</div>
       <div class="foot-tagline">Your trusted partner for online shopping and full-spectrum digital & traditional advertising services across India.</div>
       <div class="social-links">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-youtube"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        @if(!empty($settings['facebook_url']))<a href="{{ $settings['facebook_url'] }}" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>@endif
+        @if(!empty($settings['instagram_url']))<a href="{{ $settings['instagram_url'] }}" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>@endif
+        @if(!empty($settings['youtube_url']))<a href="{{ $settings['youtube_url'] }}" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>@endif
+        @if(!empty($settings['twitter_url']))<a href="{{ $settings['twitter_url'] }}" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>@endif
+        @if(!empty($settings['whatsapp_url']))
+          @php $wa = str_starts_with($settings['whatsapp_url'], 'http') ? $settings['whatsapp_url'] : 'https://wa.me/' . preg_replace('/[^0-9]/', '', $settings['whatsapp_url']); @endphp
+          <a href="{{ $wa }}" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+        @endif
       </div>
     </div>
     <div class="foot-col">

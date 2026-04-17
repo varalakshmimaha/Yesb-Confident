@@ -2,11 +2,20 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EnquiryController;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
 
 // Main Website
 Route::get('/', function () {
-    return view('home');
+    $settings = [
+        'logo_path' => Setting::get('logo_path'),
+        'facebook_url' => Setting::get('facebook_url'),
+        'instagram_url' => Setting::get('instagram_url'),
+        'youtube_url' => Setting::get('youtube_url'),
+        'twitter_url' => Setting::get('twitter_url'),
+        'whatsapp_url' => Setting::get('whatsapp_url'),
+    ];
+    return view('home', compact('settings'));
 })->name('home');
 
 // Enquiry Form Submission
@@ -22,4 +31,5 @@ Route::prefix('admin')->group(function () {
     Route::delete('/enquiry/{enquiry}', [AdminController::class, 'destroy'])->name('admin.enquiry.destroy');
     Route::delete('/enquiries/all', [AdminController::class, 'destroyAll'])->name('admin.enquiry.destroyAll');
     Route::get('/export-csv', [AdminController::class, 'exportCsv'])->name('admin.export');
+    Route::post('/settings', [AdminController::class, 'updateSettings'])->name('admin.settings.update');
 });
