@@ -209,6 +209,11 @@
     .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;margin-bottom:60px}
     .about-img-box{position:relative}
     .about-img-box img{width:100%;height:480px;object-fit:cover;border-radius:20px;box-shadow:0 20px 50px rgba(10,35,66,.12)}
+    .about-img-grid{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:10px;border-radius:20px;overflow:hidden;box-shadow:0 20px 50px rgba(10,35,66,.12);height:480px}
+    .about-img-grid .tile{position:relative;overflow:hidden}
+    .about-img-grid .tile img{width:100%;height:100%;object-fit:cover;border-radius:0;box-shadow:none;transition:transform .5s ease}
+    .about-img-grid .tile:hover img{transform:scale(1.08)}
+    .about-img-grid .tile::after{content:attr(data-label);position:absolute;left:10px;bottom:10px;background:rgba(10,35,66,.85);color:#fff;padding:4px 10px;border-radius:6px;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
     .about-img-box::after{content:'';position:absolute;top:20px;left:20px;right:-20px;bottom:-20px;border:2.5px solid var(--accent);border-radius:20px;z-index:-1;opacity:.4}
     .about-img-badge{position:absolute;bottom:24px;right:-20px;background:linear-gradient(135deg,var(--accent),#f0b840);color:var(--primary);padding:18px 28px;border-radius:14px;box-shadow:0 10px 30px rgba(232,160,32,.35);text-align:center}
     .about-img-badge .badge-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;line-height:1}
@@ -530,7 +535,14 @@
   <div class="about-wrapper">
     <div class="about-grid">
       <div class="about-img-box reveal">
-        <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=700&q=80" alt="Customer shopping in a retail store">
+        <div class="about-img-grid">
+          <div class="tile" data-label="Smartphones"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&q=80" alt="Smartphones"></div>
+          <div class="tile" data-label="Laptops"><img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&q=80" alt="Laptops"></div>
+          <div class="tile" data-label="Audio"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80" alt="Audio"></div>
+          <div class="tile" data-label="Fashion"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80" alt="Fashion"></div>
+          <div class="tile" data-label="Bags"><img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&q=80" alt="Bags"></div>
+          <div class="tile" data-label="Kitchen"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=80" alt="Kitchen"></div>
+        </div>
         <div class="about-img-badge">
           <div class="badge-num">5+</div>
           <div class="badge-text">Years of Service</div>
