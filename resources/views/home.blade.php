@@ -534,7 +534,7 @@
   <div class="about-wrapper">
     <div class="about-grid">
       <div class="about-img-box reveal">
-        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=900&q=85" alt="Happy customer shopping">
+        <img src="https://images.unsplash.com/photo-1607082349566-187342175e2f?w=900&q=85" alt="Variety of e-commerce products">
         <div class="about-img-badge">
           <div class="badge-num">5+</div>
           <div class="badge-text">Years of Service</div>
