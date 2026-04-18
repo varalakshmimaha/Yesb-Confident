@@ -534,12 +534,7 @@
   <div class="about-wrapper">
     <div class="about-grid">
       <div class="about-img-box reveal">
-        <div class="about-img-grid">
-          <div class="tile"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&q=80" alt="Smartphones"></div>
-          <div class="tile"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80" alt="Audio"></div>
-          <div class="tile"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&q=80" alt="Fashion"></div>
-          <div class="tile"><img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500&q=80" alt="Bags"></div>
-        </div>
+        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=900&q=85" alt="E-commerce shopping">
         <div class="about-img-badge">
           <div class="badge-num">5+</div>
           <div class="badge-text">Years of Service</div>
