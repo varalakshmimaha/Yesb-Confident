@@ -530,7 +530,7 @@
   <div class="about-wrapper">
     <div class="about-grid">
       <div class="about-img-box reveal">
-        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=700&q=80" alt="Our Team">
+        <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=700&q=80" alt="E-commerce products">
         <div class="about-img-badge">
           <div class="badge-num">5+</div>
           <div class="badge-text">Years of Service</div>
