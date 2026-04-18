@@ -429,12 +429,12 @@
     <div class="slide-overlay"></div>
     <div class="slide-content">
       <div class="slide-left">
-        <div class="slide-badge"><i class="fas fa-fire"></i> Mega Sale — Up to 70% Off</div>
-        <h1>Discover the<br>Latest <span>Electronics</span><br>Collection</h1>
-        <p>From flagship smartphones to premium laptops — find the best deals on top brands with free shipping across India.</p>
+        <div class="slide-badge"><i class="fas fa-bullhorn"></i> Advertising & Branding Experts</div>
+        <h1>Grow Your<br><span>Business</span> With<br>Yesb Confident</h1>
+        <p>Complete advertising solutions — from social media to outdoor hoardings. Let us help your brand reach the right audience and grow faster.</p>
         <div class="slide-btns">
-          <button class="btn-slide primary" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})"><i class="fas fa-shopping-cart"></i>&nbsp; Shop Now</button>
-          <button class="btn-slide secondary" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})"><i class="fas fa-th-large"></i>&nbsp; Browse Categories</button>
+          <button class="btn-slide primary" onclick="document.getElementById('enquiry').scrollIntoView({behavior:'smooth'})"><i class="fas fa-paper-plane"></i>&nbsp; Contact Us</button>
+          <button class="btn-slide secondary" onclick="document.getElementById('advertising').scrollIntoView({behavior:'smooth'})"><i class="fas fa-rocket"></i>&nbsp; Our Services</button>
         </div>
       </div>
       <div class="slide-right">
@@ -451,12 +451,12 @@
     <div class="slide-overlay"></div>
     <div class="slide-content">
       <div class="slide-left">
-        <div class="slide-badge"><i class="fas fa-star"></i> New Arrivals 2025</div>
-        <h1>Trending<br><span>Fashion</span> &<br>Lifestyle</h1>
-        <p>Explore our curated collection of premium apparel, bags, and accessories — stylish looks for every occasion.</p>
+        <div class="slide-badge"><i class="fas fa-briefcase"></i> Career Opportunities</div>
+        <h1>Work With Us<br>Earn With<br><span>Confidence</span></h1>
+        <p>Join our affiliate program and start your career journey — no experience needed, just the will to learn, grow, and earn.</p>
         <div class="slide-btns">
-          <button class="btn-slide primary" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})"><i class="fas fa-bag-shopping"></i>&nbsp; Explore Now</button>
-          <button class="btn-slide secondary"><i class="fas fa-play-circle"></i>&nbsp; Watch Lookbook</button>
+          <button class="btn-slide primary" onclick="document.getElementById('enquiry').scrollIntoView({behavior:'smooth'})"><i class="fas fa-user-plus"></i>&nbsp; Join Us Today</button>
+          <button class="btn-slide secondary" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})"><i class="fas fa-info-circle"></i>&nbsp; Learn More</button>
         </div>
       </div>
       <div class="slide-right">
@@ -620,7 +620,7 @@
         <h2>A Small Contribution to<br><span>Unemployed Youth</span></h2>
         <p>Use this platform and earn money. Advertising and sales are among the most in-demand careers today. We are trying to do an innovative job that gives you real experience, builds your skills, and puts you to work.</p>
         <p>Join us and start your career journey today — no experience needed, just the will to learn and grow.</p>
-        <button class="btn-youth-v2" onclick="window.location.href='tel:+918884110767'"><i class="fas fa-rocket"></i>&nbsp; Join Us Today</button>
+        <button class="btn-youth-v2" onclick="document.getElementById('enquiry').scrollIntoView({behavior:'smooth'})"><i class="fas fa-rocket"></i>&nbsp; Join Us Today</button>
       </div>
     </div>
   </div>
