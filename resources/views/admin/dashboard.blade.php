@@ -263,7 +263,7 @@
       <table>
         <thead>
           <tr>
-            <th>#</th><th>Name</th><th>Phone</th><th>Occupation</th><th>Affiliate</th><th>Date</th><th>Status</th><th>Actions</th>
+            <th>#</th><th>Name</th><th>Phone</th><th>Email</th><th>Occupation</th><th>Affiliate</th><th>Date</th><th>Status</th><th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -272,9 +272,10 @@
               <td style="color:var(--muted)">{{ $index + 1 }}</td>
               <td class="td-name">{{ $enquiry->name }}</td>
               <td class="td-phone"><a href="tel:{{ $enquiry->phone }}">{{ $enquiry->phone }}</a></td>
+              <td>{{ $enquiry->email ?? '—' }}</td>
               <td>{{ $enquiry->occupation }}</td>
               <td><span class="status-badge {{ $enquiry->affiliate_interest == 'yes' ? 'status-contacted' : 'status-closed' }}">{{ $enquiry->affiliate_interest == 'yes' ? 'Yes' : 'No' }}</span></td>
-              <td class="td-date">{{ $enquiry->created_at->format('d/m/Y h:i A') }}</td>
+              <td class="td-date">{{ $enquiry->created_at->format('d/m/Y') }}</td>
               <td><span class="status-badge status-{{ $enquiry->status }}">{{ $enquiry->status }}</span></td>
               <td>
                 <div class="action-btns">
