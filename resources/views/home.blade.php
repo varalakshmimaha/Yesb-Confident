@@ -65,6 +65,28 @@
     .nav-menu{display:flex;gap:6px}
     .nav-menu a{font-size:13.5px;font-weight:500;letter-spacing:.3px;padding:8px 16px;border-radius:8px;transition:var(--transition);position:relative}
     .nav-menu a:hover,.nav-menu a.active{background:rgba(232,160,32,.1);color:var(--accent)}
+    /* Services Mega Dropdown */
+    .has-mega{display:flex;align-items:center}
+    .mega-trigger{display:flex;align-items:center;gap:5px;font-size:13.5px;font-weight:500;letter-spacing:.3px;padding:8px 16px;border-radius:8px;transition:var(--transition);cursor:pointer;color:var(--text);text-decoration:none}
+    .mega-trigger:hover,.has-mega.open .mega-trigger{background:rgba(232,160,32,.1);color:var(--accent)}
+    .mega-trigger .chev{font-size:10px;transition:transform .25s ease;color:var(--muted);display:inline-block}
+    .has-mega:hover .mega-trigger .chev,.has-mega.open .mega-trigger .chev{transform:rotate(180deg);color:var(--accent)}
+    .services-mega{position:absolute;top:100%;left:0;right:0;background:var(--white);border-top:2px solid var(--accent);box-shadow:0 10px 40px rgba(0,0,0,.12);z-index:999;padding:24px 40px 28px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .25s ease,transform .25s ease,visibility .25s;pointer-events:none}
+    .has-mega:hover .services-mega,.has-mega.open .services-mega{opacity:1;visibility:visible;transform:translateY(0);pointer-events:all}
+    .mega-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+    .mega-top-title{font-size:15px;font-weight:700;color:var(--primary)}
+    .mega-top-sub{font-size:11.5px;color:var(--muted);margin-top:2px}
+    .mega-view-all{font-size:12px;font-weight:600;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border:1px solid var(--accent);border-radius:8px;transition:var(--transition);white-space:nowrap}
+    .mega-view-all:hover{background:var(--accent);color:var(--primary)}
+    .svc-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+    .svc-item{border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:var(--transition);text-decoration:none;display:block;background:var(--white)}
+    .svc-item:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.1);border-color:rgba(232,160,32,.5)}
+    .svc-img{width:100%;height:72px;overflow:hidden}
+    .svc-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+    .svc-item:hover .svc-img img{transform:scale(1.08)}
+    .svc-info{padding:7px 9px 9px}
+    .svc-info h5{font-size:11px;font-weight:700;color:var(--primary);margin-bottom:2px;line-height:1.3}
+    .svc-info p{font-size:10px;color:var(--muted);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 
     .nav-actions{display:flex;gap:12px;align-items:center}
     .nav-actions .search-box{display:flex;align-items:center;background:var(--light);border-radius:10px;padding:0 14px;height:40px;gap:8px;border:1px solid var(--border);transition:var(--transition)}
@@ -421,6 +443,34 @@
     <a href="#about">About Us</a>
     <a href="#categories">Category</a>
     <a href="#advertising">Advertising</a>
+    <div class="has-mega" id="servicesMegaWrap">
+      <a href="#advertising" class="mega-trigger" onclick="toggleMega(event)">Services <i class="fas fa-chevron-down chev"></i></a>
+      <div class="services-mega" id="servicesMegaPanel">
+        <div class="mega-top">
+          <div>
+            <div class="mega-top-title">Our Advertising Services</div>
+            <div class="mega-top-sub">14 complete solutions to grow your brand</div>
+          </div>
+          <a href="#advertising" class="mega-view-all" onclick="closeMega()">View All Services &nbsp;<i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="svc-grid">
+          <a href="#advertising" class="svc-item" onclick="closeMega()"><div class="svc-img"><img src="https://images.unsplash.com/photo-1504270997636-07ddfbd48945?w=300&q=70" alt="Print"></div><div class="svc-info"><h5>Print Advertisement</h5><p>Newspapers, magazines &amp; flyers with wide regional reach</p></div></a>
+          <a href="#advertising" class="svc-item" onclick="closeMega()"><div class="svc-img"><img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=300&q=70" alt="BC Ads"></div><div class="svc-info"><h5>Direct BC Ads</h5><p>Targeted business card campaigns for local businesses</p></div></a>
+          <a href="#advertising" class="svc-item" onclick="closeMega()"><div class="svc-img"><img src="https://images.unsplash.com/photo-1526554850534-7c78330d5f90?w=300&q=70" alt="Direct Mail"></div><div class="svc-info"><h5>Direct Mail</h5><p>Physical mailers delivered directly to your audience</p></div></a>
+          <a href="#advertising" class="svc-item" onclick="closeMega()"><div class="svc-img"><img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=300&q=70" alt="Podcast"></div><div class="svc-info"><h5>Podcast Ads</h5><p>Reach engaged listeners through curated podcast spots</p></div></a>
+          <a href="#advertising" class="svc-item" onclick="closeMega()"><div class="svc-img"><img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=300&q=70" alt="Mobile"></div><div class="svc-info"><h5>Mobile Ads</h5><p>SMS, in-app &amp; push notification campaigns</p></div></a>
+          <a href="#advertising" class="svc-item" onclick="closeMega()"><div class="svc-img"><img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=300&q=70" alt="Social Media"></div><div class="svc-info"><h5>Social Media</h5><p>Facebook, Instagram, YouTube &amp; more — all managed</p></div></a>
+          <a href="#advertising" class="svc-item" onclick="closeMega()"><div class="svc-img"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&q=70" alt="PPC"></div><div class="svc-info"><h5>Paid Search (PPC)</h5><p>Google Ads &amp; Bing — top of search results</p></div></a>
+          <a href="#advertising" class="svc-item" onclick="closeMega()"><div class="svc-img"><img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=300&q=70" alt="Native"></div><div class="svc-info"><h5>Native Advertising</h5><p>Seamlessly blend ads into editorial content</p></div></a>
+          <a href="#advertising" class="svc-item" onclick="closeMega()"><div class="svc-img"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&q=70" alt="Display"></div><div class="svc-info"><h5>Display Ads</h5><p>Banner &amp; rich media across premium networks</p></div></a>
+          <a href="#advertising" class="svc-item" onclick="closeMega()"><div class="svc-img"><img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=300&q=70" alt="Outdoor"></div><div class="svc-info"><h5>Outdoor Ads</h5><p>Hoardings, bus stops &amp; out-of-home placements</p></div></a>
+          <a href="#advertising" class="svc-item" onclick="closeMega()"><div class="svc-img"><img src="https://images.unsplash.com/photo-1533750516457-a7f992034fec?w=300&q=70" alt="Guerrilla"></div><div class="svc-info"><h5>Guerrilla Ads</h5><p>Creative street-level activations that stop people</p></div></a>
+          <a href="#advertising" class="svc-item" onclick="closeMega()"><div class="svc-img"><img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=300&q=70" alt="Product Placement"></div><div class="svc-info"><h5>Product Placement</h5><p>Feature your brand in videos &amp; online content</p></div></a>
+          <a href="#advertising" class="svc-item" onclick="closeMega()"><div class="svc-img"><img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=300&q=70" alt="Public Service"></div><div class="svc-info"><h5>Public Service Ads</h5><p>Build trust through community-focused campaigns</p></div></a>
+          <a href="#advertising" class="svc-item" onclick="closeMega()"><div class="svc-img"><img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=300&q=70" alt="Programmatic"></div><div class="svc-info"><h5>Programmatic Ads</h5><p>AI-driven automated ad buying across thousands of sites</p></div></a>
+        </div>
+      </div>
+    </div>
     <a href="#enquiry">Contact</a>
   </div>
   <div class="nav-actions">
@@ -1002,6 +1052,19 @@
   slider.addEventListener('touchend', e => {
     const diff = touchStartX - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1);
+  });
+
+  // ===== SERVICES MEGA MENU =====
+  function toggleMega(e) {
+    e.preventDefault();
+    document.getElementById('servicesMegaWrap').classList.toggle('open');
+  }
+  function closeMega() {
+    document.getElementById('servicesMegaWrap').classList.remove('open');
+  }
+  document.addEventListener('click', function(e) {
+    const wrap = document.getElementById('servicesMegaWrap');
+    if (wrap && !wrap.contains(e.target)) wrap.classList.remove('open');
   });
 
   // Scroll to enquiry if success flash present
