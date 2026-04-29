@@ -71,17 +71,20 @@
     .mega-trigger:hover,.has-mega.open .mega-trigger{background:rgba(232,160,32,.1);color:var(--accent)}
     .mega-trigger .chev{font-size:10px;transition:transform .25s ease;color:var(--muted);display:inline-block}
     .has-mega:hover .mega-trigger .chev,.has-mega.open .mega-trigger .chev{transform:rotate(180deg);color:var(--accent)}
-    .services-mega{position:absolute;top:100%;left:0;right:0;background:var(--white);border-top:2px solid var(--accent);box-shadow:0 10px 40px rgba(0,0,0,.12);z-index:999;padding:24px 40px 28px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .25s ease,transform .25s ease,visibility .25s;pointer-events:none}
+    .services-mega{position:absolute;top:100%;left:0;right:0;background:var(--white);border-top:2px solid var(--accent);box-shadow:0 10px 40px rgba(0,0,0,.12);z-index:999;padding:28px 40px 32px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .25s ease,transform .25s ease,visibility .25s;pointer-events:none;max-height:80vh;overflow-y:auto}
     .has-mega:hover .services-mega,.has-mega.open .services-mega{opacity:1;visibility:visible;transform:translateY(0);pointer-events:all}
-    .mega-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
-    .mega-top-title{font-size:15px;font-weight:700;color:var(--primary)}
-    .mega-top-sub{font-size:11.5px;color:var(--muted);margin-top:2px}
-    .mega-view-all{font-size:12px;font-weight:600;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border:1px solid var(--accent);border-radius:8px;transition:var(--transition);white-space:nowrap}
+    .mega-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+    .mega-top-left .mega-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+    .mega-top-title{font-size:20px;font-weight:800;color:var(--primary)}
+    .mega-top-sub{font-size:12px;color:var(--muted);margin-top:3px}
+    .mega-view-all{font-size:12px;font-weight:600;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border:1px solid var(--accent);border-radius:8px;transition:var(--transition);white-space:nowrap}
     .mega-view-all:hover{background:var(--accent);color:var(--primary)}
-    .svc-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
-    .svc-item{border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:var(--transition);text-decoration:none;display:block;background:var(--white)}
-    .svc-item:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.1);border-color:rgba(232,160,32,.5)}
-    .svc-img{width:100%;height:72px;overflow:hidden}
+    .svc-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:12px}
+    .svc-item{border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:var(--transition);text-decoration:none;display:block;background:var(--white);position:relative}
+    .svc-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),#f0b840);transform:scaleX(0);transition:transform .3s ease;transform-origin:center}
+    .svc-item:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.1);border-color:transparent}
+    .svc-item:hover::after{transform:scaleX(1)}
+    .svc-img{width:100%;height:100px;overflow:hidden}
     .svc-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
     .svc-item:hover .svc-img img{transform:scale(1.08)}
     .svc-info{padding:7px 9px 9px}
@@ -447,9 +450,10 @@
       <a href="#advertising" class="mega-trigger" onclick="toggleMega(event)">Services <i class="fas fa-chevron-down chev"></i></a>
       <div class="services-mega" id="servicesMegaPanel">
         <div class="mega-top">
-          <div>
-            <div class="mega-top-title">Our Advertising Services</div>
-            <div class="mega-top-sub">14 complete solutions to grow your brand</div>
+          <div class="mega-top-left">
+            <div class="mega-label">Grow Your Brand</div>
+            <div class="mega-top-title">14 Advertising Services</div>
+            <div class="mega-top-sub">Complete advertising solutions to boost your business visibility</div>
           </div>
           <a href="#advertising" class="mega-view-all" onclick="closeMega()">View All Services &nbsp;<i class="fas fa-arrow-right"></i></a>
         </div>
